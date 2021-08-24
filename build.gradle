@@ -3,11 +3,11 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'groovy'
     id 'java'
+    id "com.github.node-gradle.node" version "3.0.1"
 }
 
-group 'com.dabramov'
-version '1.0-SNAPSHOT'
-sourceCompatibility = '11'
+group 'com.dabramov.todoservice'
+version '0.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -26,7 +26,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.projectlombok:lombok:1.18.18'
 
-    runtimeOnly 'com.h2database:h2'
     implementation('org.postgresql:postgresql')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -35,3 +34,30 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task build_web(type: Exec) {
+    workingDir 'src/main/webapp'
+    if (System.getProperty("os.name").toLowerCase().contains("windows"))
+        commandLine("cmd.exe", "/C", "npm.cmd run build")
+    else
+        commandLine("npm", "run", "build")
+}
+
+task rename_web(type: Copy) {
+    from('src/main/webapp/build') {
+        rename 'build', 'static'
+    }
+    into 'src/main/resources/public'
+}
+
+task create_cmd(type: Copy){
+    String command = "java -jar ${project.name}-${version}.jar"
+    File file = new File('src/scripts/start.cmd')
+    file.write(command)
+    from 'src/scripts'
+    into 'build/libs'
+}
+
+build.dependsOn build_web
+build_web.finalizedBy rename_web
+build.finalizedBy create_cmd

@@ -1,3 +1,9 @@
 /build/
 /.gradle/
 /gradle/
+/src/main/webapp/node_modules/
+/src/main/webapp/.vscode/
+/src/main/webapp/build/
+/src/main/resources/static/
+/src/main/webapp/package-lock.json
+/.idea/
