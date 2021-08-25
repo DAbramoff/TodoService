@@ -3,7 +3,7 @@ import * as api from "../api/TasksApi";
 import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button'
-import { ButtonGroup, Col, Image, InputGroup, ListGroup, Row} from 'react-bootstrap';
+import {Col, Image, ListGroup, Row} from 'react-bootstrap';
 import NewTask from './NewTask';
 
 class TaskForm extends React.Component {
