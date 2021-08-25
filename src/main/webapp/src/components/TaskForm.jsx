@@ -3,7 +3,7 @@ import * as api from "../api/TasksApi";
 import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button'
-import { Col, Image, ListGroup, Row} from 'react-bootstrap';
+import { ButtonGroup, Col, Image, InputGroup, ListGroup, Row} from 'react-bootstrap';
 import NewTask from './NewTask';
 
 class TaskForm extends React.Component {
@@ -53,28 +53,28 @@ class TaskForm extends React.Component {
                 <Card>
                     <Card.Header as="h1" >Simple Todo Service</Card.Header>
                     <Card.Header as="h4" >Sinergy of Java, Groovy + Spring Boot and React JS</Card.Header>
-                    <Card.Body>
-                        <Card.Title style={{ marginBottom: '2em'}}>
-                            <Row>
-                                <Col>
-                                    <Image src="java.svg" roundedCircle />
-                                </Col>
-                                <Col>
-                                    <Image src="groovy.svg" roundedCircle />
-                                </Col>
-                                <Col>
-                                    <Image src="spring.svg" roundedCircle />
-                                </Col>
-                                <Col>
-                                    <Image src="reactjs.svg" roundedCircle />
-                                </Col>
-                            </Row>
-                        </Card.Title>
-                        <Row xs={2} md={8} className="g-4">
+                    <Card.Title>
+                        <Row>
+                            <Col>
+                                <Image src="java.svg" roundedCircle />
+                            </Col>
+                            <Col>
+                                <Image src="groovy.svg" roundedCircle />
+                            </Col>
+                            <Col>
+                                <Image src="spring.svg" roundedCircle />
+                            </Col>
+                            <Col>
+                                <Image src="reactjs.svg" roundedCircle />
+                            </Col>
+                        </Row>
+                    </Card.Title>
+                    <Card.Body style={{overflowY: "auto", maxHeight: window.innerHeight * 0.7}}>
+                        <Row xs={1} md={3} lg={6} className="g-4">
                             {
                                 this.state.tasks.map(task => {
                                     return (
-                                        <Col  key={task.id} style={{ width: '18rem', margin: '1em'}}>
+                                        <Col  key={task.id} >
                                             <Card>
                                                 <Card.Body>
                                                     <Card.Title>Todo task {task.id}</Card.Title>
@@ -91,18 +91,14 @@ class TaskForm extends React.Component {
                                 })
                             }
                         </Row>
-                        <Row>
-                            <Col sm={1}>
-                                <Button variant="primary" onClick={() => this.loadTasks()}>Load all</Button>
-                            </Col>
-                            <Col sm={10}>
-                                <NewTask reload={this.loadTasks}/>
-                            </Col>
-                            <Col sm={1}>
-                                <Button variant="primary" onClick={() => this.deleteAllTasks()}>Delete all</Button>
-                            </Col>
-                        </Row>
                     </Card.Body>
+                    <Card.Footer>
+                        <Row>
+                            <Col><Button variant="primary" onClick={() => this.loadTasks()}>Load all</Button></Col>
+                            <Col  xs={6} sm={7} md={8} lg={9} xl={10}><NewTask reload={this.loadTasks}/></Col>
+                            <Col><Button variant="secondary" onClick={() => this.deleteAllTasks()}>Delete all</Button></Col>
+                        </Row>
+                    </Card.Footer>
                 </Card>
             </div>
         );
