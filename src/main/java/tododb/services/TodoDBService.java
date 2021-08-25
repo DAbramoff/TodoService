@@ -16,5 +16,7 @@ public interface TodoDBService {
 
     void deleteTodo(Integer todoId);
 
+    void deleteAll();
+
     Integer deleteByStatus(Boolean isCompleted);
 }

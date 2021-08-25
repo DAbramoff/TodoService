@@ -32,6 +32,11 @@ class TodoController {
         todoService.deleteTodo(todoId)
     }
 
+    @DeleteMapping(path = "/deleteAll")
+    deleteAll() {
+        todoService.deleteAll()
+    }
+
     @GetMapping(path = "/get")
     Todo getTodoById(@RequestParam Integer todoId) {
         todoService.findById(todoId)

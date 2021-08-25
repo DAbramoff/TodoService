@@ -39,6 +39,11 @@ public class TodoDBServiceImpl implements TodoDBService {
     }
 
     @Override
+    public void deleteAll() {
+        todoRepository.deleteAll();
+    }
+
+    @Override
     public Integer deleteByStatus(Boolean isCompleted) {
         return todoRepository.deleteByCompleted(isCompleted);
     }
