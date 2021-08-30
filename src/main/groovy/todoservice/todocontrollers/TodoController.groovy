@@ -13,8 +13,8 @@ class TodoController {
     TodoDBService todoService
 
     @GetMapping(path = "/getAll")
-    List<Todo> getAllTodoList() {
-        todoService.findAll()
+    List<Todo> getAllTodoList(@RequestParam Boolean deleted) {
+        todoService.findAll(deleted)
     }
 
     @PostMapping(path = "/add")
@@ -28,17 +28,12 @@ class TodoController {
     }
 
     @DeleteMapping(path = "/delete")
-    deleteTodo(@RequestParam Integer todoId) {
-        todoService.deleteTodo(todoId)
+    deleteTodo(@RequestParam Long todoId) {
+        todoService.deleteTodo(todoId) //Soft delete
     }
 
     @DeleteMapping(path = "/deleteAll")
-    deleteAll() {
-        todoService.deleteAll()
-    }
-
-    @GetMapping(path = "/get")
-    Todo getTodoById(@RequestParam Integer todoId) {
-        todoService.findById(todoId)
+    deleteAll(@RequestParam Boolean softDelete) {
+        todoService.deleteAll(softDelete) //Soft delete
     }
 }

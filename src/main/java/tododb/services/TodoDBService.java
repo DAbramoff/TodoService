@@ -6,17 +6,13 @@ import java.util.List;
 
 public interface TodoDBService {
 
-    List<Todo> findAll();
-
-    Todo findById(Integer todoId);
+    List<Todo> findAll(Boolean deleted);
 
     Todo saveTodo(Todo todo);
 
     Todo updateTodo(Todo todo);
 
-    void deleteTodo(Integer todoId);
+    void deleteTodo(Long todoId);
 
-    void deleteAll();
-
-    Integer deleteByStatus(Boolean isCompleted);
+    void deleteAll(Boolean softDelete);
 }

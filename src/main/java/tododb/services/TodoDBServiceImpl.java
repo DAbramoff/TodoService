@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tododb.entities.Todo;
 import tododb.repositories.TodoRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -14,13 +15,12 @@ public class TodoDBServiceImpl implements TodoDBService {
     TodoRepository todoRepository;
 
     @Override
-    public List<Todo> findAll() {
-        return todoRepository.findAll();
-    }
-
-    @Override
-    public Todo findById(Integer todoId) {
-        return todoRepository.findById(todoId).get();
+    public List<Todo> findAll(Boolean deleted) {
+        if (deleted) {
+            return todoRepository.findAllDeleted();
+        } else {
+            return todoRepository.findAll();
+        }
     }
 
     @Override
@@ -34,18 +34,17 @@ public class TodoDBServiceImpl implements TodoDBService {
     }
 
     @Override
-    public void deleteTodo(Integer todoId) {
+    public void deleteTodo(Long todoId) {
         todoRepository.deleteById(todoId);
     }
 
     @Override
-    public void deleteAll() {
-        todoRepository.deleteAll();
-    }
-
-    @Override
-    public Integer deleteByStatus(Boolean isCompleted) {
-        return todoRepository.deleteByCompleted(isCompleted);
+    public void deleteAll(Boolean softDelete) {
+        if (softDelete) {
+            todoRepository.softDeleteAll(new Date());
+        } else {
+            todoRepository.deleteAll();
+        }
     }
 }
 

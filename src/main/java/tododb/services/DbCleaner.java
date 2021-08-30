@@ -10,16 +10,16 @@ import javax.transaction.Transactional;
 @Transactional
 @Component("DbCleaner")
 public class DbCleaner {
-    @Value("${tododb.select.status.completion: true}")
-    boolean completionStatus;
+
+    @Value("${tododb.cleaner.soft.delete.enabled: true}")
+    boolean softDetele;
+
     @Autowired
     private TodoDBService todoService;
 
     @PostConstruct
     private void clearDb() {
-        System.out.println("******** Start delete " + (completionStatus ? "completed" : "not completed") + " tasks ********");
-        System.out.println(todoService.deleteByStatus(completionStatus));
-        System.out.println(todoService.deleteByStatus(!completionStatus));
-        System.out.println("******** All " + (completionStatus ? "completed" : "not completed") + " tasks deleted ********");
+        System.out.println("******** Clear db with " + (softDetele ? "soft" : "hard") + " delete ********");
+        todoService.deleteAll(softDetele);
     }
 }

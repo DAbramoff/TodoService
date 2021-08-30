@@ -1,29 +1,25 @@
 package tododb.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "TODO")
-public class Todo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+public class Todo extends BaseEntity {
 
     @Column(name = "TASK")
-    String task;
+    protected String task;
 
-    @Column(name = "COMPLETED")
-    Boolean completed = false;
+    @Column(name = "COMPLETE_DATE")
+    protected Date completeDate;
 
     public Todo() {
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public Todo(String task) {
+        this.task = task;
     }
 
     public String getTask() {
@@ -34,20 +30,23 @@ public class Todo {
         this.task = task;
     }
 
-    public Boolean getCompleted() {
-        return completed;
+    public Date getCompleteDate() {
+        return completeDate;
     }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+    public void setCompleteDate(Date completeDate) {
+        this.completeDate = completeDate;
     }
 
     @Override
     public String toString() {
         return "Todo{" +
                 "id=" + id +
+                ", creationDate=" + creationDate +
+                ", updateDate=" + updateDate +
+                ", deleteDate=" + deleteDate +
                 ", task='" + task + '\'' +
-                ", isCompleted=" + completed +
+                ", completeDate=" + completeDate +
                 '}';
     }
 }
