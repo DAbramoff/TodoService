@@ -3,6 +3,7 @@ package todoservice.todocontrollers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import tododb.entities.Todo
+import tododb.entities.TodoStatusEnum
 import tododb.services.TodoDBService
 
 @RestController
@@ -13,8 +14,8 @@ class TodoController {
     TodoDBService todoService
 
     @GetMapping(path = "/getAll")
-    List<Todo> getAllTodoList(@RequestParam Boolean deleted) {
-        todoService.findAll(deleted)
+    List<Todo> getAllTodoList(@RequestParam TodoStatusEnum status) {
+        todoService.findAll(status)
     }
 
     @PostMapping(path = "/add")
@@ -28,12 +29,12 @@ class TodoController {
     }
 
     @DeleteMapping(path = "/delete")
-    deleteTodo(@RequestParam Long todoId) {
-        todoService.deleteTodo(todoId) //Soft delete
+    deleteTodo(@RequestParam Long todoId, @RequestParam(required = false) Boolean softDelete) {
+        todoService.deleteTodo(todoId, softDelete ?: false)
     }
 
     @DeleteMapping(path = "/deleteAll")
-    deleteAll(@RequestParam Boolean softDelete) {
-        todoService.deleteAll(softDelete) //Soft delete
+    deleteAll(@RequestParam(required = false) Boolean softDelete) {
+        todoService.deleteAll(softDelete ?: false)
     }
 }

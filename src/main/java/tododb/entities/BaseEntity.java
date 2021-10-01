@@ -23,10 +23,6 @@ public class BaseEntity {
     @Column(name = "UPDATE_DATE")
     protected Date updateDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "DELETE_DATE")
-    protected Date deleteDate;
-
     public Long getId() {
         return id;
     }
@@ -49,13 +45,5 @@ public class BaseEntity {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
-    }
-
-    public Date getDeleteDate() {
-        return deleteDate;
-    }
-
-    public void setDeleteDate(Date deleteDate) {
-        this.deleteDate = deleteDate;
     }
 }

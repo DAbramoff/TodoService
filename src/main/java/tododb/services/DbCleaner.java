@@ -19,7 +19,7 @@ public class DbCleaner {
 
     @PostConstruct
     private void clearDb() {
-        System.out.println("******** Clear db with " + (softDetele ? "soft" : "hard") + " delete ********");
-        todoService.deleteAll(softDetele);
+//        System.out.println("******** Clear db with " + (softDetele ? "soft" : "hard") + " delete ********");
+//        todoService.deleteAll(softDetele);
     }
 }

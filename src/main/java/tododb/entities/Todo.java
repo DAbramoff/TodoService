@@ -1,9 +1,6 @@
 package tododb.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Date;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TODO")
@@ -12,8 +9,12 @@ public class Todo extends BaseEntity {
     @Column(name = "TASK")
     protected String task;
 
-    @Column(name = "COMPLETE_DATE")
-    protected Date completeDate;
+    @Column(name = "DESCRIPTION")
+    protected String description;
+
+    @Column(name = "STATUS")
+    @Enumerated(EnumType.ORDINAL)
+    protected TodoStatusEnum status = TodoStatusEnum.ACTIVE;
 
     public Todo() {
     }
@@ -30,23 +31,31 @@ public class Todo extends BaseEntity {
         this.task = task;
     }
 
-    public Date getCompleteDate() {
-        return completeDate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCompleteDate(Date completeDate) {
-        this.completeDate = completeDate;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public TodoStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(TodoStatusEnum status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Todo{" +
+        return "Todo {" +
                 "id=" + id +
                 ", creationDate=" + creationDate +
                 ", updateDate=" + updateDate +
-                ", deleteDate=" + deleteDate +
-                ", task='" + task + '\'' +
-                ", completeDate=" + completeDate +
+                ", task=" + task +
+                ", description=" + description +
+                ", status=" + status.code() +
                 '}';
     }
 }

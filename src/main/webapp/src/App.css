@@ -1,7 +1,66 @@
-.main {
-  text-align: center;
+body {
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+}
+#root{
+  height: inherit;
+  background: linear-gradient(to bottom right, #ffd89b, #19547b);
+}
+.main{
+  height: inherit;
+  margin-inline: 10%;
   background-color: whitesmoke;
-  height: 100vh;
-  margin-left: 15vh;
-  margin-right: 15vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.h-1{
+  text-align: center;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+  font-size: 3em;
+}
+
+.h-3{
+  text-align: center;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+  font-size: 1.5em;
+}
+
+#task_form{
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  flex-grow: 1;
+  padding: 16px;
+  max-height: 68vh;
+}
+#task_form::-webkit-scrollbar {
+  display: none;
+}
+
+#task_footer{
+  position: absolute;
+  height: 5vh;
+  background-color: whitesmoke;
+  width: 100%;
+  bottom: 0;
+}
+#footer_input_group{
+  display: flex;
+  margin-block: 10px;
+}
+
+#spin_div {
+  min-height: 100%;
+  text-align: center;
 }

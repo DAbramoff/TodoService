@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export function getAlltasks(callback){
-    axios.get("/todo/getAll")
+export function getAlltasks(status, callback){
+    axios.get("/todo/getAll?status=" + status)
         .then(response => {
             callback.onSuccess(response.data)
         })
@@ -20,8 +20,19 @@ export function addTask(data, callback){
     });
 }
 
-export function deleteTask(id, callback){
-    axios.delete("/todo/delete?todoId=" + id)
+export function updateTask(task, status, callback){
+    task.status = status;
+    axios.post("/todo/update", task)
+    .then(response => {
+        callback.onSuccess(response.data)
+    })
+    .catch(error => {
+        callback.onErorr(error)
+    });
+}
+
+export function deleteTask(id, softDelete, callback){
+    axios.delete("/todo/delete?todoId=" + id + "&softDelete=" + softDelete)
     .then(() => {
         callback.onSuccess()
     })
