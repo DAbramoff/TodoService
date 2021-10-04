@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input} from 'antd';
+import { message, Button, Input} from 'antd';
 import 'antd/dist/antd.css';
 import {RedoOutlined, PlusSquareOutlined} from '@ant-design/icons';
 import * as api from "../api/TasksApi";
@@ -16,10 +16,11 @@ class TodoFooter extends React.Component {
     let task = {task: this.state.task, description: this.state.description, status:"ACTIVE"}
     api.addTask(task, {
         onSuccess: (response) => {
-          console.error(response);
+          message.success(`Task ${response.task} (${response.id}) successfully added as ACTIVE`);
+          this.props.reload()
         },
         onErorr: (error) => {
-          console.error(error);
+          message.error(`Task: ${error.message} was not added`);
         }
     })
 }

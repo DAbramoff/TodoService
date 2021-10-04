@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Card, Col, Divider, Row} from 'antd';
+import { message, Card, Col, Divider, Row} from 'antd';
 import * as api from "../../api/TasksApi";
 import '../../App.css';
 import { DeleteOutlined, CheckOutlined, IssuesCloseOutlined } from '@ant-design/icons';
@@ -23,27 +23,29 @@ class DeletedTasksForm extends React.Component {
                 this.setState({tasks: response})
             },
             onErorr: (error) => {
-                console.error(error);
+                message.error(`Fail to load tasks - ${error.message}`);
             }
         })
     }
     updateTask(task, status){
         api.updateTask(task, status, {
             onSuccess: (response) => {
+                message.success(`Task ${task.id} restored to ${status}`);
                 this.loadTasks();
             },
             onErorr: (error) => {
-                console.error(error);
+                message.error(`Fail to update task - ${error.message}`);
             }
         })
     }
     deleteTask(id){
         api.deleteTask(id, false, {
             onSuccess: (response) => {
+                message.success(`Task ${id} deleted completely`);
                 this.loadTasks();
             },
             onErorr: (error) => {
-                console.error(error);
+                message.error(`Fail to delete task - ${error.message}`);
             }
         })
     }

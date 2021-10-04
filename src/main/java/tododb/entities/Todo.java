@@ -19,8 +19,10 @@ public class Todo extends BaseEntity {
     public Todo() {
     }
 
-    public Todo(String task) {
+    public Todo(String task, String description, TodoStatusEnum status) {
         this.task = task;
+        this.description = description;
+        this.status = status;
     }
 
     public String getTask() {

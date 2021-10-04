@@ -51,6 +51,13 @@ task rename_web(type: Copy) {
     into 'src/main/resources/public'
 }
 
+task copy_jar(type: Copy) {
+    from("/build/libs/${project.name}-${version}.jar") {
+        rename "${project.name}-${version}.jar", 'todo-service.jar'
+    }
+    into 'src/docker'
+}
+
 task create_cmd(type: Copy){
     String command = "java -jar ${project.name}-${version}.jar"
     File file = new File('src/scripts/start.cmd')
@@ -59,6 +66,15 @@ task create_cmd(type: Copy){
     into 'build/libs'
 }
 
+task deploy(type: Exec) {
+    workingDir 'src/docker'
+    if (System.getProperty("os.name").toLowerCase().contains("windows"))
+        commandLine("cmd.exe", '/c', "docker-compose up")
+    else
+        commandLine("docker-compose up")
+}
+
 build.dependsOn build_web
 build_web.finalizedBy rename_web
-build.finalizedBy create_cmd
+rename_web.finalizedBy create_cmd
+create_cmd.finalizedBy copy_jar
