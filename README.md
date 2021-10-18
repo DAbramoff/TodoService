@@ -2,8 +2,8 @@
 
 #### The aim of this project is to learn some programming aspects with integration JavaScript,The aim of this project is to learn some programming aspects with integration JavaScript, Java, Groovy and Spring Boot in one Project with deployment on Docker.
 - SpringBoot - SpringData, REST Api, DI
-- Groovy - the Service side
-- Java - ORM and Base DB manupulation
+- Groovy - Service side (Controller, DB Service)
+- Java - ORM and CRUD manupulation
 - JavaScript (ReactJs based on Ant Desing lib) - The web interface
 - PostgreSQL - DBMS
 - Docker - Deployment
